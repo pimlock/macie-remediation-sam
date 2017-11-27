@@ -1,0 +1,53 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Description: Remediates security alerts detected by Amazon Macie
+
+Parameters:
+  SafeBucketName:
+    Type: String
+    Description: Bucket where all the risky files will be copied for quarantine
+    Default: ""
+  LambdaFunctionMemorySize:
+    Type: Number
+    Description: Amount of memory dedicated for Lambda function
+    Default: 128
+  LambdaFunctionTimeout:
+    Type: Number
+    Description: Maximum time for how long Lambda can be runing
+    Default: 60
+
+Resources:
+  RemediationFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: Remediates security alerts detected by Amazon Macie
+      Handler: macie_remediation.lambda_handler.main
+      Runtime: python3.6
+      CodeUri: ./macie-remediation-sam-package.zip
+      Policies:
+        # for some of the remediations more permissions may be required, edit this part when using this CF template
+        - S3CrudPolicy:
+            BucketName: '*'
+        # some of the remediations may be written as separate Lambda functions that are invoked from this Lambda function
+        - LambdaInvokePolicy:
+            FunctionName: '*'
+      Timeout: !Ref LambdaFunctionTimeout
+      MemorySize: !Ref LambdaFunctionMemorySize
+      Events:
+        newAlert:
+          Type: CloudWatchEvent
+          Properties:
+            Pattern:
+              source:
+                - aws.macie
+      Environment:
+        Variables:
+          SAFE_BUCKET_NAME:
+            Ref: SafeBucketName
+      DeadLetterQueue:
+        Type: SQS
+        TargetArn:
+          Fn::GetAtt: [RemediationFunctionDLQ, Arn]
+
+  RemediationFunctionDLQ:
+    Type: AWS::SQS::Queue

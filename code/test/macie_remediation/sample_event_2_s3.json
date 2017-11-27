@@ -1,0 +1,64 @@
+{
+  "version": "0",
+  "id": "207e6da4-e450-b61e-c330-d28a3d5df479",
+  "detail-type": "Macie Alert",
+  "source": "aws.macie",
+  "account": "111122223333",
+  "time": "2017-11-25T05:54:58Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:macie:us-east-1:111122223333:trigger/6173056e6602ba51843211b3067d4ed7/alert/bb0ea05aba8cfaf6b6d680b8ff09cc85",
+    "arn:aws:macie:us-east-1:111122223333:trigger/6173056e6602ba51843211b3067d4ed7"
+  ],
+  "detail": {
+    "notification-type": "ALERT_UPDATED",
+    "tags": [
+      "Data Compliance",
+      "Basic Alert"
+    ],
+    "name": "RSA Private Key uploaded to AWS S3",
+    "severity": "MEDIUM",
+    "url": "https://mt.us-east-1.macie.aws.amazon.com/posts/da6d32dfb9675399e27eb28e86dbcf5cbe2b2a3a",
+    "alert-arn": "arn:aws:macie:us-east-1:111122223333:trigger/6173056e6602ba51843211b3067d4ed7/alert/bb0ea05aba8cfaf6b6d680b8ff09cc85",
+    "risk-score": 6,
+    "created-at": "2017-11-24T01:45:26.401000",
+    "actor": "ala-ma-kota",
+    "summary": {
+      "Description": "RSA Private Key uploaded to AWS S3. An RSA key is the private encryption key that will be used to protect sensitive information. Please verify that the storage of credential material in this S3 bucket is in compliance with your organization's policies and that properly locked down access control mechanisms are in place to protect these credentials",
+      "Object": {
+        "ala-ma-kota/sample-key": 1,
+        "ala-ma-kota/0-another-copy-test.txt": 1,
+        "ala-ma-kota/copy-test.txt": 1,
+        "ala-ma-kota/copy-sample-key": 1,
+        "ala-ma-kota/another-copy-test.txt": 1,
+        "ala-ma-kota/test-2.txt": 1
+      },
+      "Record Count": 6,
+      "Themes": {
+        "Dropbox Links": 1,
+        "email/all": 2,
+        "RSA Private Key": 6,
+        "encryption_key": 3
+      },
+      "Event Count": 6,
+      "Timestamps": {
+        "2017-11-24T01:28:05+00:00": 2,
+        "2017-11-24T01:28:03+00:00": 3,
+        "2017-11-24T01:28:02+00:00": 1
+      },
+      "Owner": {
+        "owner_id": 6
+      },
+      "DLP risk": {
+        "8": 6
+      }
+    },
+    "trigger": {
+      "rule-arn": "arn:aws:macie:us-east-1:111122223333:trigger/6173056e6602ba51843211b3067d4ed7",
+      "alert-type": "basic",
+      "created-at": "2017-11-22 00:14:57.958000+00:00",
+      "description": "RSA Private Key uploaded to AWS S3. An RSA key is the private encryption key that will be used to protect sensitive information. Please verify that the storage of credential material in this S3 bucket is in compliance with your organization's policies and that properly locked down access control mechanisms are in place to protect these credentials",
+      "risk": 6
+    }
+  }
+}

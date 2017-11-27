@@ -1,0 +1,34 @@
+{
+  "version": "0",
+  "id": "CWE-event-id",
+  "detail-type": "Macie Alert",
+  "source": "aws.macie",
+  "account": "111122223333",
+  "time": "2017-04-24T22:28:49Z",
+  "region": "us-east-1",
+  "resources": [
+    "arn:aws:macie:us-east-1:111122223333:trigger/trigger_id/alert/alert_id",
+    "arn:aws:macie:us-east-1:111122223333:trigger/trigger_id"
+  ],
+  "detail": {
+    "notification-type": "ALERT_CREATED",
+    "name": "Scanning bucket policies",
+    "tags": [
+      "Custom_Alert",
+      "Insider"
+    ],
+    "url": "https://lb00.us-east-1.macie.aws.amazon.com/111122223333/posts/alert_id",
+    "alert-arn": "arn:aws:macie:us-east-1:111122223333:trigger/trigger_id/alert/alert_id",
+    "risk-score": 8,
+    "trigger": {
+      "rule-arn": "arn:aws:macie:us-east-1:111122223333:trigger/trigger_id",
+      "alert-type": "basic",
+      "created-at": "2017-01-02 19:54:00.644000",
+      "description": "Alerting on failed enumeration of large number of bucket policies",
+      "risk": 8
+    },
+    "created-at": "2017-04-18T00:21:12.059000",
+    "actor": "555566667777:assumed-role:superawesome:aroaidpldc7nsesfnheji",
+    "summary": "{ALERT_DETAILS_JSON}"
+  }
+}
